@@ -1,0 +1,7 @@
+[
+    {
+        "directory": "D:\\DEV\\OpenGL_3d_Project\\src",
+        "command": "cl /std:c++20 /I include src/main.cpp /c /EHsc",
+        "file": "src/main.cpp"
+    }
+]

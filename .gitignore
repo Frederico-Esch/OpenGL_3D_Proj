@@ -1,0 +1,8 @@
+build
+docs
+dependencies
+include/KHR
+include/glad
+include/GLFW
+src/glad.c
+*.dll
