@@ -8,6 +8,8 @@ add_executable(opengl_3d_project
     "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/Renderer.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/Window.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Buffers.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Shader.cpp"
 )
 
 target_include_directories(opengl_3d_project PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
@@ -22,12 +24,12 @@ add_custom_command(
 )
 
 #SHADERS
-#add_custom_command(
-#    TARGET opengl_3d_project POST_BUILD
-#    COMMAND ${CMAKE_COMMAND} -E create_symlink
-#    "${CMAKE_CURRENT_SOURCE_DIR}/shaders"
-#    "$<TARGET_FILE_DIR:opengl_3d_project>/shaders" #"${CMAKE_BINARY_DIR}/shaders"
-#)
+add_custom_command(
+    TARGET opengl_3d_project POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E create_symlink
+    "${CMAKE_CURRENT_SOURCE_DIR}/shaders"
+    "$<TARGET_FILE_DIR:opengl_3d_project>/shaders" #"${CMAKE_BINARY_DIR}/shaders"
+)
 
 #TEXTURES
 #add_custom_command(

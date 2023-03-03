@@ -3,15 +3,14 @@
 
 class Window {
 private:
-  GLFWwindow *WindowPtr;
-  Size WindowSize;
-  string Name;
-  bool initilized;
+    GLFWwindow *WindowPtr = nullptr;
+    Size WindowSize;
+    string Name;
 
 public:
-  Window(int width, int height, string name, GLFWmonitor* monitor, GLFWwindow* parent);
-  Window();
+    Window(int width, int height, string name, GLFWmonitor* monitor, GLFWwindow* parent);
+    ~Window();
 
-  GLFWwindow* getGLFWWindow();
-  Size getSize();
+    GLFWwindow* getGLFWWindow();
+    Size getSize();
 };

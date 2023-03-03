@@ -1,17 +1,14 @@
 #include <Window.h>
 
-Window::Window(){ initilized = false; };
-
 GLFWwindow* Window::getGLFWWindow() { return WindowPtr; }
 
 Size Window::getSize() { return WindowSize; }
 
 Window::Window(int width, int height, string name, GLFWmonitor* monitor, GLFWwindow* parent)
 {
-    initilized = true;
     if(!glfwInit()) {
-        auto exception = new std::exception("GLFW failed to init");
-        std::cout << exception->what() << std::endl;
+        auto exception = std::runtime_error("GLFW failed to init");
+        std::cout << exception.what() << std::endl;
         throw exception;
     }
 
@@ -20,8 +17,8 @@ Window::Window(int width, int height, string name, GLFWmonitor* monitor, GLFWwin
     auto windowHandler = glfwCreateWindow(width, height, name.c_str(), monitor, parent);
     if ( windowHandler == nullptr) {
         glfwTerminate();
-        auto exception = new std::exception("Failed to create window");
-        std::cout << exception->what() << std::endl;
+        auto exception = std::runtime_error("Failed to create window");
+        std::cout << exception.what() << std::endl;
         throw exception;
     }
     glfwMakeContextCurrent(windowHandler);
@@ -29,8 +26,21 @@ Window::Window(int width, int height, string name, GLFWmonitor* monitor, GLFWwin
 
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         glfwTerminate();
-        auto exception = new std::exception("GLAD failed to load");
-        std::cout << exception->what() << std::endl;
+        auto exception = std::runtime_error("GLAD failed to load");
+        std::cout << exception.what() << std::endl;
         throw exception;
     }
+
+#ifdef DEBUG_PRINT
+    std::cout << "Window Initialized" << std::endl;
+    std::cout << "GLFW Context Current Set" << std::endl;
+#endif
+}
+
+Window::~Window() {
+    glfwDestroyWindow(WindowPtr);
+
+#ifdef DEBUG_PRINT
+    std::cout << "Window Destroyed" << std::endl;
+#endif
 }

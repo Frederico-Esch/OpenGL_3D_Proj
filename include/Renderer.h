@@ -1,12 +1,14 @@
 #pragma once
 #include <main.h>
 #include <Window.h>
+#include <Buffers.h>
 
 class Renderer {
 private:
-    Window MainWindow;
+    Window* MainWindow = nullptr;
+    Buffers* MainBuffers = nullptr;
 public:
-    Renderer(Window window);
+    Renderer(Window* window, Buffers* buffers);
     Renderer();
 
     void Run();

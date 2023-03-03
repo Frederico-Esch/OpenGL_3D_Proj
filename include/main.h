@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <vector>
+#include <array>
 typedef std::string string;
 
 struct Size {
@@ -11,3 +12,6 @@ struct Size {
     Size(Size& size): Width(size.Width), Height(size.Height) {}
     Size(): Width(0), Height(0) {}
 };
+
+
+#define DEBUG_PRINT
