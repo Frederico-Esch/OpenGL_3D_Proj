@@ -9,6 +9,9 @@ private:
     const GLvoid* ElementsOffset;
 
     Shader* MainShader = nullptr;
+
+    GLuint Texture = 0;
+    GLint TextureUnit = -1;
 public:
 
     GLuint VertexArrayObject;
@@ -24,6 +27,11 @@ public:
     //Variadic size buffer
     void VBOBind(GLsizei stride, std::vector<float> data, GLenum flags, GLenum mode);
     void EBOBind(std::vector<unsigned int> data, GLenum flags, const GLvoid* offset, GLenum type);
+
+    void LoadTexture(string texture_path, std::vector<std::pair<GLenum, GLint>> parameters);
+    void DeleteTexture();
+
+    void SetTextureUnit(GLint textureLocation, GLuint unit);
 
     void SetShader(Shader* shader);
     void ClearShader();

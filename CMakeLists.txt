@@ -32,9 +32,9 @@ add_custom_command(
 )
 
 #TEXTURES
-#add_custom_command(
-#    TARGET opengl_3d_project POST_BUILD
-#    COMMAND ${CMAKE_COMMAND} -E create_symlink
-#    "${CMAKE_CURRENT_SOURCE_DIR}/textures"
-#    "$<TARGET_FILE_DIR:opengl_3d_project>/textures" #"${CMAKE_BINARY_DIR}/textures"
-#)
+add_custom_command(
+    TARGET opengl_3d_project POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E create_symlink
+    "${CMAKE_CURRENT_SOURCE_DIR}/textures"
+    "$<TARGET_FILE_DIR:opengl_3d_project>/textures" #"${CMAKE_BINARY_DIR}/textures"
+)

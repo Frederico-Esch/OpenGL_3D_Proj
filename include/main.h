@@ -4,6 +4,8 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 #include <array>
+#include <stb_image.h>
+#include <glm/glm.hpp>
 typedef std::string string;
 
 struct Size {

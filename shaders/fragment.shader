@@ -1,7 +1,11 @@
 #version 450 core
 
-layout (location = 0) out vec4 colorOut;
+uniform sampler2D cubeTexture;
+
+layout (location = 0) in vec2 texturePos;
+
+out vec4 colorOut;
 
 void main() {
-    colorOut = vec4(1.0, 0.0, 0.0, 1.0);
+    colorOut = texture(cubeTexture, texturePos); //vec4(1, 0, 0, 1);
 }

@@ -16,5 +16,8 @@ public:
     Shader(string vertex_shader_path, string fragment_shader_path);
     ~Shader();
 
+    GLint GetUniformLocation(string name);
+
     void Use(bool clear = false);
+    GLuint GetProgram();
 };

@@ -1,8 +1,11 @@
 build
 docs
 dependencies
+textures
 include/KHR
 include/glad
 include/GLFW
+include/glm
+include/stb_*
 src/glad.c
 *.dll

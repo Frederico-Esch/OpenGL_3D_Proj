@@ -32,6 +32,12 @@ void Shader::VerifyCompilation(GLuint shader, string name) {
     if (!success) throw std::runtime_error("Compilation Error in the " + name + " Shader");
 }
 
+GLint Shader::GetUniformLocation(string name) {
+    GLint uniform = glGetUniformLocation(Program, name.c_str());
+    if ( uniform < 0 ) throw std::runtime_error("Uniform does not exist");
+    return (GLuint) uniform;
+}
+
 void Shader::VerifyLink(GLuint program, string name) {
     GLint success;
     glGetProgramiv(program, GL_LINK_STATUS, &success);
@@ -98,6 +104,8 @@ Shader::~Shader() {
     std::cout << "Program Deleted" << std::endl;
 #endif
 }
+
+GLuint Shader::GetProgram() { return Program; }
 
 void Shader::Use(bool clear) {
     if (clear) glUseProgram(0);
