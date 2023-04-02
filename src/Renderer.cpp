@@ -9,6 +9,13 @@ Renderer::Renderer(Window* window, Buffers* buffers) : MainWindow(window), MainB
 #endif
 }
 
+void Renderer::SetupBlending() {
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+}
+
 void Renderer::Run() {
     if (MainBuffers == nullptr || MainWindow == nullptr) return;
 

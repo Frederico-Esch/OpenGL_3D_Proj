@@ -4,6 +4,15 @@ GLFWwindow* Window::getGLFWWindow() { return WindowPtr; }
 
 Size Window::getSize() { return WindowSize; }
 
+void Window::_ResizeCallBack(GLFWwindow* window, int width, int height) {
+    Window* _this = (Window*)glfwGetWindowUserPointer(window);
+
+    _this->WindowSize.Width = width;
+    _this->WindowSize.Height = height;
+
+    glViewport(0, 0, width, height);
+}
+
 Window::Window(int width, int height, string name, GLFWmonitor* monitor, GLFWwindow* parent)
 {
     if(!glfwInit()) {
@@ -30,6 +39,9 @@ Window::Window(int width, int height, string name, GLFWmonitor* monitor, GLFWwin
         std::cout << exception.what() << std::endl;
         throw exception;
     }
+
+    glfwSetWindowUserPointer(windowHandler, this);
+    glfwSetWindowSizeCallback(windowHandler, Window::_ResizeCallBack);
 
 #ifdef DEBUG_PRINT
     std::cout << "Window Initialized" << std::endl;

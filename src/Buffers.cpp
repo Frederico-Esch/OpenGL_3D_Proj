@@ -31,11 +31,11 @@ Buffers::~Buffers() {
 #endif
 }
 
-void Buffers::VBOBind(GLsizei stride, std::vector<float> data, GLenum mode) {
+void Buffers::VBOBind(GLsizei stride, std::vector<Vertex> data, GLenum mode) {
 
     glVertexArrayVertexBuffer(VertexArrayObject, 0, VertexBufferObject, 0, stride);
 
-    glNamedBufferStorage(VertexBufferObject, sizeof(float)*data.size(), data.data(), GL_DYNAMIC_STORAGE_BIT);
+    glNamedBufferStorage(VertexBufferObject, sizeof(data[0])*data.size(), data.data(), GL_DYNAMIC_STORAGE_BIT);
 
     DrawMode = mode;
 
@@ -60,11 +60,11 @@ void Buffers::EBOBind(std::vector<unsigned int> data, const GLvoid* offset, GLen
 #endif
 }
 
-void Buffers::VBOBind(GLsizei stride, std::vector<float> data, GLenum flags, GLenum mode) {
+void Buffers::VBOBind(GLsizei stride, std::vector<Vertex> data, GLenum flags, GLenum mode) {
 
     glVertexArrayVertexBuffer(VertexArrayObject, 0, VertexBufferObject, 0, stride);
 
-    glNamedBufferData(VertexBufferObject, sizeof(float)*data.size(), data.data(), flags);
+    glNamedBufferData(VertexBufferObject, sizeof(data[0])*data.size(), data.data(), flags);
 
     DrawMode = mode;
 
@@ -86,6 +86,15 @@ void Buffers::EBOBind(std::vector<unsigned int> data, GLenum flags, const GLvoid
 #ifdef DEBUG_PRINT
     std::cout << "EBO binded with variadic size" << std::endl;
 #endif
+}
+
+void Buffers::PushAttribute(Attribute attribute) {
+    GLuint attribute_index = (GLuint)attribs.size();
+    attribs.push_back(attribute);
+
+    glEnableVertexArrayAttrib (VertexArrayObject, attribute_index);
+    glVertexArrayAttribFormat (VertexArrayObject, attribute_index, attribute.count, attribute.type, attribute.normalized, attribute.relative_offset);
+    glVertexArrayAttribBinding(VertexArrayObject, attribute_index, 0);
 }
 
 void Buffers::LoadTexture(string texture_path, std::vector<std::pair<GLenum, GLint>> parameters) {

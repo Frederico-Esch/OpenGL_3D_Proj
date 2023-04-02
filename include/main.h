@@ -6,6 +6,7 @@
 #include <array>
 #include <stb_image.h>
 #include <glm/glm.hpp>
+#include <Vertex.h>
 typedef std::string string;
 
 struct Size {

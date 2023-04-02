@@ -11,5 +11,6 @@ public:
     Renderer(Window* window, Buffers* buffers);
     Renderer();
 
+    void SetupBlending();
     void Run();
 };
